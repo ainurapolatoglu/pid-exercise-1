@@ -3,15 +3,17 @@ package com.sda.pid;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @XmlRootElement
-public class Bar {
+public class Bar implements  Comparable<Bar> {
     private String SN; //attribute
-    private double fat; // the rest down are elements
+    private Double fat; // the rest down are elements
     private double energy;
     private double carbs;
-    private double protein;
+    private Double protein;
     private double fiber;
     private List<Reviewer> reviewers;
 
@@ -19,7 +21,7 @@ public class Bar {
         return SN;
     }
 
-    @XmlAttribute
+    @XmlAttribute ( name = "SN")   // if we put attribute it by default thinks it is ID, so we show that it is not ID but SN from XML
     public void setSN(String SN) {
         this.SN = SN;
     }
@@ -78,7 +80,17 @@ public class Bar {
         this.reviewers = reviewers;
     }
 
-   // @Override
+    @Override
+    public int compareTo(Bar protein) {
+        return this.protein.compareTo(protein.getProtein());
+    }
+
+    //Last name sorter
+   // Comparator<Double> comparedByFat = (Double o1, Bar o2) ->
+     //       o1..getFat().compareTo( o2.getFat() );
+
+
+    // @Override
     /* public String toString() {
         return "Bars:: ID=" + this.fat + " Name=" + this.name + " Age=" + this.age + " Gender=" + this.gender
                 + " Role=" + this.role;
