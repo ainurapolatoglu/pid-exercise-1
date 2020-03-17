@@ -4,11 +4,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDate;
+import java.util.Date;
 
-@XmlRootElement
+@XmlRootElement (name = "reviewer")
 public class Reviewer {
     private String personId;
-    private LocalDate reviewDate;
+    private Date reviewDate;
     private int reviewScore;
 
     public String getPersonId() {
@@ -20,12 +21,12 @@ public class Reviewer {
         this.personId = personId;
     }
 
-    public LocalDate getReviewDate() {
+    public Date getReviewDate() {
         return reviewDate;
     }
 
     @XmlElement ( name = "date")
-    public void setReviewDate(LocalDate reviewDate) {
+    public void setReviewDate(Date reviewDate) {
         this.reviewDate = reviewDate;
     }
 
@@ -37,4 +38,6 @@ public class Reviewer {
     public void setReviewScore(int reviewScore) {
         this.reviewScore = reviewScore;
     }
+
+
 }

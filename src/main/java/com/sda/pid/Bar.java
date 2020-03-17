@@ -2,6 +2,7 @@ package com.sda.pid;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Comparator;
 import java.util.List;
@@ -75,7 +76,8 @@ public class Bar implements  Comparable<Bar> {
         return reviewers;
     }
 
-    @XmlElement ( name = "review")
+    @XmlElementWrapper ( name = "review")
+    @XmlElement ( name = "reviewer")
     public void setReviewers(List<Reviewer> reviewers) {
         this.reviewers = reviewers;
     }
@@ -84,4 +86,6 @@ public class Bar implements  Comparable<Bar> {
     public int compareTo(Bar protein) {
         return this.protein.compareTo(protein.getProtein());
     }
+
+
 }

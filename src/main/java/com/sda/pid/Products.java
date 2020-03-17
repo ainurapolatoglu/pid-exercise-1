@@ -2,6 +2,7 @@ package com.sda.pid;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +17,7 @@ public class Products {
         return bars;
     }
 
-    @XmlElement ( name = "bar")
+    @XmlElement(name = "bar")
     public void setBars(List<Bar> bars) {
         this.bars = bars;
     }
@@ -29,13 +30,32 @@ public class Products {
         }
     }
 
-    public void filterBarsByFiberAndPrint(Double fiberAmount){
-
-        // List<Bar> filteredBars= bars.stream().filter(bars -> bars.getFiber().contains(fiberAmount)).collect(Collectors.toList());
-
+    public void filterBarsByFiberAndPrint(Double fiberAmount) {
         for (Bar bar : bars) {
-            if (bar.getFiber().compareTo(fiberAmount) == -1)
+            if (bar.getFiber() < fiberAmount)
                 System.out.println(bar.getSN());
         }
+    }
+
+    public List<Bar> filterBarsByProtein(Double proteinAmount) {
+        List<Bar> filteredList = new ArrayList<>();
+        for (Bar bar : bars) {
+            if (bar.getProtein() > proteinAmount) {
+                filteredList.add(bar);
+            }
+        }
+        return filteredList;
+    }
+
+    public void filterReviewersAndPrint(List<Bar> barList, String user) {
+        for (Bar bar : barList) {
+            for (Reviewer reviewer : bar.getReviewers()) {
+                if (user.equals(reviewer.getPersonId())) {
+                    System.out.println(bar.getSN());
+                    break;
+                }
+            }
+        }
+
     }
 }

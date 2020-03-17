@@ -6,6 +6,7 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 
 public class BarsApp {
@@ -49,13 +50,20 @@ public class BarsApp {
                         .reversed());
                 products.printBars();
 
-
             } else if (option == 4) {  // Filter bars which has less than "some number from the user" fiber and sort them from highest to lowest.
                 System.out.println("Please enter Fiber amount.");
                Double fiber = Double.parseDouble(in.nextLine());
+                products.getBars().sort(Comparator.comparingDouble(Bar::getFiber).reversed());
                 products.filterBarsByFiberAndPrint(fiber);
 
             } else if (option == 5) { // Find all protein bars with more than X protein reviewed by Y (X and Y should be entered from the user).
+                System.out.println("Please enter Protein amount:");
+                Double protein = Double.parseDouble(in.nextLine());
+                List<Bar> filteredList = products.filterBarsByProtein(protein);
+
+                System.out.println("Please enter Reviewer ID:");
+                String reviewer = in.nextLine();
+                products.filterReviewersAndPrint(filteredList, reviewer);
 
             } else if (option == 6) {
                 System.out.println(" Thank you! Come again!");
