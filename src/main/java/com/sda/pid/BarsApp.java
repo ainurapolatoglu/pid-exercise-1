@@ -6,9 +6,7 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class BarsApp {
 
@@ -34,49 +32,30 @@ public class BarsApp {
                 Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
                 File xmlFile = new File(ClassLoader.getSystemClassLoader().getResource("bar.xml").getFile());
                 products = (Products) jaxbUnmarshaller.unmarshal(xmlFile);
-                System.out.println(products.getBars().size());
+                //System.out.println(products.getBars().size());
             } catch (JAXBException e) {
                 e.printStackTrace();
             }
 
-            // Printing unsorted initial list of Bar names
-            if (option == 1) {
-                int numberOfBars = products.getBars().size();
-                for (int i = 0; i < numberOfBars; i++) {
-                    String s = (i + 1) + " " + products.getBars().get(i).getSN();
-                    System.out.println(s);
-                }
+            if (option == 1) {   // Printing unsorted initial list of Bar names
+                products.printBars();
 
-                // Printing sorted list of Bar names by highest protein content
-            } else if (option == 2) {
-                // Sorting by protein in reverse order
+            } else if (option == 2) {  // Printing sorted list of Bar names by highest protein content
                 Collections.sort(products.getBars(), Collections.reverseOrder());
-                {
-                    int numberOfBars = products.getBars().size();
-                    for (int i = 0; i < numberOfBars; i++) {
-                        String s = (i + 1) + " " + products.getBars().get(i).getSN();
-                        System.out.println(s);
-                    }
-                }
+                products.printBars();
 
-                // Printing sorted list of Bar names by highest fat content
-            } else if (option == 3) {
-
+            } else if (option == 3) {  // Printing sorted list of Bar names by highest fat content
                 products.getBars().sort(Comparator.comparingDouble(Bar::getFat)
                         .reversed());
-                {
-                    int numberOfBars = products.getBars().size();
-                    for (int i = 0; i < numberOfBars; i++) {
-                        String s = (i + 1) + " " + products.getBars().get(i).getSN();
-                        System.out.println(s);
-                    }
-                }
-
-                // Printing filtered Bar names
-            } else if (option == 4) {
+                products.printBars();
 
 
-            } else if (option == 5) {
+            } else if (option == 4) {  // Filter bars which has less than "some number from the user" fiber and sort them from highest to lowest.
+                System.out.println("Please enter Fiber amount.");
+               Double fiber = Double.parseDouble(in.nextLine());
+                products.filterBarsByFiberAndPrint(fiber);
+
+            } else if (option == 5) { // Find all protein bars with more than X protein reviewed by Y (X and Y should be entered from the user).
 
             } else if (option == 6) {
                 System.out.println(" Thank you! Come again!");

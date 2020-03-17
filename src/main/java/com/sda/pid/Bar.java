@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 public class Bar implements  Comparable<Bar> {
     private String SN; //attribute
     private Double fat; // the rest down are elements
-    private double energy;
-    private double carbs;
+    private Double energy;
+    private Double carbs;
     private Double protein;
-    private double fiber;
+    private Double fiber;
     private List<Reviewer> reviewers;
 
     public String getSN() {
@@ -62,12 +62,12 @@ public class Bar implements  Comparable<Bar> {
         this.protein = protein;
     }
 
-    public double getFiber() {
+    public Double getFiber() {
         return fiber;
     }
 
     @XmlElement
-    public void setFiber(double fiber) {
+    public void setFiber(Double fiber) {
         this.fiber = fiber;
     }
 
@@ -84,16 +84,4 @@ public class Bar implements  Comparable<Bar> {
     public int compareTo(Bar protein) {
         return this.protein.compareTo(protein.getProtein());
     }
-
-    //Last name sorter
-   // Comparator<Double> comparedByFat = (Double o1, Bar o2) ->
-     //       o1..getFat().compareTo( o2.getFat() );
-
-
-    // @Override
-    /* public String toString() {
-        return "Bars:: ID=" + this.fat + " Name=" + this.name + " Age=" + this.age + " Gender=" + this.gender
-                + " Role=" + this.role;
-    } */
-
 }
