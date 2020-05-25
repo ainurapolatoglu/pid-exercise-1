@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @XmlRootElement
 public class Products {
@@ -24,10 +25,7 @@ public class Products {
 
     public void printBars() {
         int numberOfBars = bars.size();
-        for (int i = 0; i < numberOfBars; i++) {
-            String s = (i + 1) + " " + bars.get(i).getSN();
-            System.out.println(s);
-        }
+        IntStream.range(0, numberOfBars).mapToObj(i -> (i + 1) + " " + bars.get(i).getSN()).forEachOrdered(System.out::println);
     }
 
     public void filterBarsByFiberAndPrint(Double fiberAmount) {
